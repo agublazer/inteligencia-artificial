@@ -1,4 +1,3 @@
-# from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import keras
@@ -12,11 +11,8 @@ image_height = 224
 # from keras.applications import VGG16
 from keras.applications import Xception
 
-# Load the VGG model
-# vgg_conv = VGG16(weights='imagenet', include_top=False, input_shape=(image_width, image_height, 3))
 vgg_conv = Xception(weights='imagenet', include_top=False, input_shape=(image_width, image_height, 3))
 
-# Freeze the layers except the last 4 layers
 for layer in vgg_conv.layers[:-8]:
     layer.trainable = False
 
@@ -53,8 +49,8 @@ train_datagen = ImageDataGenerator(
 validation_datagen = ImageDataGenerator(rescale=1./255)
  
 # Change the batchsize according to your system RAM
-train_batchsize = 1
-val_batchsize = 1
+train_batchsize = 10
+val_batchsize = 10
  
 train_generator = train_datagen.flow_from_directory(
         train_dir,
